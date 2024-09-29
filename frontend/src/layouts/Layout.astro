@@ -1,0 +1,111 @@
+---
+import Header from "../components/Header.astro";
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="description" content="GearSmart Garage - Book your next car service or repair online." />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="keywords" content="car repair, garage booking, vehicle maintenance, car service" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+	<!-- SEO: Open Graph and Twitter Cards -->
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content="Book your car's service or repair with GearSmart Garage." />
+	<meta property="og:image" content="/og-image.jpg" />
+	<meta property="og:type" content="website" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content="Get the best car repair and maintenance service with GearSmart Garage." />
+	<meta name="twitter:image" content="/twitter-image.jpg" />
+
+	<!-- Preload important fonts for faster loading -->
+	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" as="style" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" />
+
+	<title>{title} | GearSmart Garage</title>
+</head>
+
+<body>
+<!-- Include the Header component -->
+<Header />
+
+<!-- Ensure content is visible and not hidden under the header -->
+<main style="padding-top: 80px;">
+	<slot />
+</main>
+
+<!-- Footer or other global components could be added here -->
+</body>
+</html>
+
+<style is:global>
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+		--color-background: #13151a;
+		--font-main: 'Montserrat', sans-serif;
+	}
+
+	html {
+		font-family: var(--font-main);
+		background: var(--color-background);
+		font-size: 62.5%;
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	/* Full-Width Header */
+	.header {
+		width: 100vw; /* Make the header span the entire viewport width */
+		background-color: var(--color-black);
+		position: fixed;
+		top: 0;
+		z-index: 1000;
+		border-bottom: 1px solid var(--color-gray);
+	}
+
+	/* Full-Width Navigation Bar */
+	.navbar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1.5rem;
+		width: 100%; /* Full width of the browser */
+		margin: 0 auto;
+	}
+
+	main {
+		padding: 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
+	}
+
+	/* Optimize link styles */
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+</style>

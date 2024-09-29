@@ -1,0 +1,265 @@
+---
+// Import Google Fonts directly here if required
+import { useEffect } from 'react';
+---
+
+// HTML for the header
+<header class="header">
+    <nav class="navbar" aria-label="Main Navigation">
+        <a href="/" class="nav-logo" aria-label="GearSmart Home">GearSmart Garage</a>
+        <ul class="nav-menu" id="nav-menu" aria-label="Primary Navigation">
+            <li class="nav-item">
+                <a href="/home" class="nav-link" aria-label="Home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="/services" class="nav-link" aria-label="Services">Services</a>
+            </li>
+            <li class="nav-item">
+                <a href="/about" class="nav-link" aria-label="About Us">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="/contact" class="nav-link" aria-label="Contact">Contact</a>
+            </li>
+        </ul>
+        <div class="action-buttons">
+            <a href="tel:+1234567890" class="call-button" aria-label="Call us for booking inquiries">
+                <span class="phone-icon">📞</span>
+                <span class="phone-number">+123 456 7890</span>
+            </a>
+            <a href="/book-now" class="nav-link book-now" aria-label="Book a service appointment">Book Now</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.querySelector("#hamburger");
+        const navMenu = document.querySelector("#nav-menu");
+
+        // Toggle Menu Function
+        function toggleMenu() {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        }
+
+        // Open/Close the menu on hamburger click
+        hamburger.addEventListener("click", toggleMenu);
+
+        // Close the menu when a link is clicked
+        const navLinks = document.querySelectorAll(".nav-link");
+        navLinks.forEach(link =>
+            link.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            })
+        );
+
+        // Close the menu when clicking outside of it
+        document.addEventListener("click", (e) => {
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                navMenu.classList.remove("active");
+                hamburger.classList.remove("active");
+            }
+        });
+    });
+</script>
+
+<style>
+    /* CSS Variables for easy theming */
+    :root {
+        --color-black: #000;
+        --color-white: #fff;
+        --color-gold: #ffba00;
+        --color-dark-gold: #e6a600;
+        --color-red: #d32f2f;
+        --color-dark-red: #b71c1c;
+        --color-gray: #333;
+        --font-main: 'Montserrat', sans-serif;
+    }
+
+    /* Global Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        font-size: 62.5%;
+        font-family: var(--font-main);
+    }
+
+    body {
+        margin: 0;
+        padding-top: 80px; /* Prevent content overlap with header */
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+
+    /* Header and Navbar Styling */
+    .header {
+        width: 100vw; /* Full viewport width */
+        background-color: var(--color-black);
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--color-gray);
+        left: 0; /* Ensures it spans the full width */
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%; /* Ensure the navbar expands fully */
+        margin: 0;
+    }
+
+    /* Logo Styling */
+    .nav-logo {
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: var(--color-gold);
+    }
+
+    /* Navigation Menu and Links Styling */
+    .nav-menu {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-grow: 1;
+        margin-right: auto;
+    }
+
+    .nav-item {
+        margin-left: 2rem;
+    }
+
+    .nav-link {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--color-white);
+        padding: 0.5rem 0;
+    }
+
+    .nav-link:hover {
+        color: var(--color-gold);
+    }
+
+    /* Call Button and Book Now Button Styling */
+    .action-buttons {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .call-button {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--color-black);
+        background-color: var(--color-gold);
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    }
+
+    .call-button:hover {
+        transform: scale(1.05);
+        background-color: var(--color-dark-gold);
+    }
+
+    .book-now {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--color-white);
+        background-color: var(--color-red);
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .book-now:hover {
+        transform: scale(1.05);
+        background-color: var(--color-dark-red);
+    }
+
+    /* Hamburger Menu Styling */
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        background: none;
+        border: none;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .hamburger .bar {
+        width: 25px;
+        height: 3px;
+        background-color: var(--color-gold);
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* Media Queries for Responsive Design */
+    @media only screen and (max-width: 1024px) {
+        .hamburger {
+            display: flex;
+        }
+
+        .action-buttons {
+            display: none;
+        }
+
+        .nav-menu {
+            position: fixed;
+            left: -100%;
+            top: 5rem;
+            flex-direction: column;
+            background-color: var(--color-black);
+            width: 100%;
+            text-align: center;
+            transition: left 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-item {
+            margin: 2rem 0;
+        }
+    }
+
+    @media only screen and (min-width: 1025px) {
+        .hamburger {
+            display: none;
+        }
+
+        .call-button .phone-number {
+            display: inline-block;
+        }
+    }
+</style>
